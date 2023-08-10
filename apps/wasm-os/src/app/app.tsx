@@ -1,17 +1,15 @@
-import styled from 'styled-components';
-
-import NxWelcome from './nx-welcome';
-
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { useEffect } from 'react';
 
 export function App() {
+  useEffect(() => {
+    import("../../public/wasm_os").then(wasm => {
+      alert(wasm.greet());
+    });
+  }, []);
+
   return (
-    <StyledApp>
-      <NxWelcome title="wasm-os" />
-    </StyledApp>
+    <div className="App">
+      Hello WASM!
+    </div>
   );
 }
-
-export default App;

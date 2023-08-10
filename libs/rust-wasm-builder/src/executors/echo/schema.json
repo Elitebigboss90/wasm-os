@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "Echo executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "wasm-os": {
+      "type": "string",
+      "description": "Name of the React application in the Nx workspace"
+    }
+  }
+}

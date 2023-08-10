@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@wasm-os-monorepo/rust-wasm-builder": [
+        "libs/rust-wasm-builder/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

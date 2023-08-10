@@ -87,6 +87,12 @@
           "codeCoverage": true
         }
       }
+    },
+    "buildRustWasm": {
+      "executor": "@wasm-os-monorepo/rust-wasm-builder:echo",
+      "options": {
+        "reactAppName": "wasm-os"
+      }
     }
   },
   "tags": []
