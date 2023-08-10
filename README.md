@@ -9,6 +9,9 @@
 
 To start the development server run `nx serve wasm-os`. Open your browser and navigate to http://localhost:4200/. Happy coding!
 
+## Build and Copy WASM project
+
+nx run wasm-os:buildRustWasm
 
 ## Generate code
 
