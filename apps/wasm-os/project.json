@@ -1,0 +1,99 @@
+{
+  "name": "wasm-os",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/wasm-os/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/wasm-os",
+        "index": "apps/wasm-os/src/index.html",
+        "baseHref": "/",
+        "main": "apps/wasm-os/src/main.tsx",
+        "tsConfig": "apps/wasm-os/tsconfig.app.json",
+        "assets": ["apps/wasm-os/src/favicon.ico", "apps/wasm-os/src/assets"],
+        "styles": [],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/wasm-os/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/wasm-os/src/environments/environment.ts",
+              "with": "apps/wasm-os/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "wasm-os:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "wasm-os:build:development"
+        },
+        "production": {
+          "buildTarget": "wasm-os:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/wasm-os/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "wasm-os:build"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/wasm-os/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "buildRustWasm": {
+      "executor": "@wasm-os-monorepo/rust-wasm-builder:echo",
+      "options": {
+        "reactAppName": "wasm-os"
+      }
+    }
+  },
+  "tags": []
+}
